@@ -35,6 +35,9 @@ int main(int argc, char **argv){
         //Mengecek jumlah argumen
         printf("Argumen anda salah\n");
         exit(EXIT_FAILURE);
+    } else if((atoi(argv[1]) < 0) || (atoi(argv[2]) < 0) || (atoi(argv[3]) < 0) || (atoi(argv[1]) > 59) || (atoi(argv[2]) > 59) || (atoi(argv[3]) > 23)){
+        printf("Argumen anda salah\n");
+        exit(EXIT_FAILURE);
     } else{
         int jadwal[4];
 
@@ -45,13 +48,6 @@ int main(int argc, char **argv){
             } else if(cekAngka(argv[i])){
                 jadwal[i] = atoi(argv[i]);
             } else{
-                printf("Argumen anda salah\n");
-                exit(EXIT_FAILURE);
-            }
-        }
-
-        if((jadwal[1] != -5) || (jadwal[2] != -5) || (jadwal[3] != -5)){
-            if((jadwal[1] >= 60) || (jadwal[2] >= 60) || (jadwal[3]) >= 24){
                 printf("Argumen anda salah\n");
                 exit(EXIT_FAILURE);
             }
