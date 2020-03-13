@@ -20,7 +20,7 @@ int cekAsterisk(char temp[]){
 
 //Fungsi untuk mengecek apakah argumen merupakan angka
 int cekAngka(char temp[]){
-    for(int i=0; i<stren(temp); i++){
+    for(int i=0; i<strlen(temp); i++){
         if((temp[i] < '0') || (temp[i] > '9')){
             return 0;
             break;
@@ -40,9 +40,9 @@ int main(int argc, char **argv){
 
         //Mengecek apakah argumen benar dengan memanggil fungsi cekAsterisk() dan cekAngka()
         for(int i=1; i<4; i++){
-            if(cekAsterisk(argv[i]) == 1){
+            if(cekAsterisk(argv[i])){
                 jadwal[i] = -5;
-            } else if(cekAngka(argv[i]) == 1){
+            } else if(cekAngka(argv[i])){
                 jadwal[i] = atoi(argv[i]);
             } else{
                 printf("Argumen anda salah\n");
@@ -81,6 +81,10 @@ int main(int argc, char **argv){
             exit(EXIT_FAILURE);
         }
 
+        if((chdir("/")) < 0 ){
+            exit(EXIT_FAILURE);
+        }
+
         close(STDIN_FILENO);
         close(STDOUT_FILENO);
         close(STDERR_FILENO);
@@ -88,14 +92,14 @@ int main(int argc, char **argv){
         //Looping utama fungsi daemon
         while(1){
             time_t t = time(NULL);
-            sturct tm tm = *localtime(&t);
+            struct tm tm = *localtime(&t);
 
             if(((tm.tm_hour == jam) || (jam == -5)) && ((tm.tm_min == menit) || (menit == -5)) && ((tm.tm_sec == detik) || (detik == -5))){
-                char *argvv = {"bash", argv[4], NULL};
-                execv("/bin/bash", argvv);
+                if(fork()==0){
+                    execl("/bin/bash", "bash", argv[4], NULL);
+                    sleep(1);
+                }
             }
-
-            sleep(1);
         }
     }
 }
