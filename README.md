@@ -1,5 +1,5 @@
 # SoalShiftSISOP20_modul2_T20
-Praktikum Sistem Operasi 2020 - Modul 1
+Praktikum Sistem Operasi 2020 - Modul 2
 Departemen Teknologi Informasi
 
 Kelompok T20
