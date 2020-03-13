@@ -83,7 +83,10 @@ int main(void){
 
                     char *argvzip[] = {"zip", "-q", namaFolderZIP, namaFolder, NULL};
                     execv("/usr/bin/zip", argvzip);
-                }
+                } else{
+                    while((wait(&status)) > 0);
+                    char *argvdel[] = {"rm", "-d", "-R", namafolder, NULL};
+                    execv("/bin/rm", argvdel);
             }
         } else{
             sleep(30);
