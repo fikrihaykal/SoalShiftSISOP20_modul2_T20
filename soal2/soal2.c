@@ -57,8 +57,10 @@ int main(void){
                 while((wait(&status)) > 0);
                 for(int i=0; i<20; i++){
                     if(fork()==0){
-                        chdir(namaFolder);
-
+                        if(chdir(namaFolder) < 0){
+                            exit(EXIT_FAILURE);
+                        }
+                        
                         int cnt;
                         cnt = (int) time(NULL);
                         cnt = (cnt % 1000) + 100;
