@@ -9,4 +9,4 @@ Anggota :
 - Hana Ghaliyah Azhar
 
 ## Kendala
-- Bobot soal terlalu suaah
+- Bobot soal terlalu sulit
