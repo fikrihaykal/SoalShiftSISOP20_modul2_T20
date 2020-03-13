@@ -37,8 +37,8 @@ int main(void){
         pid_t cid;
         int status;
         
-        time_t = time(NULL);
-        tm = localtime(&t);
+        time_t t = time(NULL);
+        struct tm* tm = localtime(&t);
 
         char namaFolder[64];
         strftime(namaFolder, 64, "%Y-%m-%d_%H:%M:%S", tm);
@@ -57,16 +57,16 @@ int main(void){
                 while((wait(&status)) > 0);
                 for(int i=0; i<20; i++){
                     if(fork()==0){
-                        chdir(namaFolder)
+                        chdir(namaFolder);
 
                         int cnt;
                         cnt = (int) time(NULL);
                         cnt = (cnt % 1000) + 100;
                         time_t tcount = time(NULL);
-                        struct tm tmcount = localtime(&tcount);
+                        struct tm* tmcount = localtime(&tcount);
 
                         char alamatDownload[48], namaFile[64];
-                        snprintf(alamatDownload, "https://picsum.photos/%d", cnt);
+                        sprintf(alamatDownload, "https://picsum.photos/%d", cnt);
                         strftime(namaFile, 64, "%Y-%m-%d+%H:%M:%S", tmcount);
 
                         char *argvv[] = {"wget", alamatDownload, "-q", namaFile, NULL};
@@ -77,9 +77,9 @@ int main(void){
 
                 if(fork() == 0){
                     char namaFolderZIP[64];
-                    snprintf(namaFolderZIP, "%s.zip", namaFolder);
+                    sprintf(namaFolderZIP, "%s.zip", namaFolder);
 
-                    char *argvzip[] = {"zip", "-q", namaFolderZIP, namaFolder, NULL}
+                    char *argvzip[] = {"zip", "-q", namaFolderZIP, namaFolder, NULL};
                     execv("/usr/bin/zip", argvzip);
                 }
             }
