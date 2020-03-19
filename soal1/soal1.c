@@ -77,12 +77,13 @@ int main(int argc, char **argv){
             time_t t = time(NULL);
             sturct tm tm = *localtime(&t);
 
-	    if(((tm.tm_hour == jam) || (jam == -5)) && ((tm.tm_min == menit) || (menit == -5)) && ((tm.tm_sec == detik) || (detik == -5))){  
-		if(fork() == 0){
+            if(((tm.tm_hour == jam) || (jam == -5)) && ((tm.tm_min == menit) || (menit == -5)) && ((tm.tm_sec == detik) || (detik == -5))){  
+                if(fork() == 0){
                     char *argvv = {"bash", argv[4], NULL};
-	            execv("/bin/bash", argvv);
-	        }
-       	    }
+                    execv("/bin/bash", argvv);
+                }
+                while(wait(NULL) > 0);
+            }
 
             sleep(1);
         }
