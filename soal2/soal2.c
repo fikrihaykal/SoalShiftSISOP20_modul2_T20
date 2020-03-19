@@ -10,6 +10,9 @@
 #include <sys/stat.h>
 
 int main(void){
+    FILE *fileTarget;
+    fileTarget = fopen("killer.sh", "w");
+    int status;
     pid_t pid, sid;
     pid = fork();
 
@@ -33,6 +36,25 @@ int main(void){
     close(STDOUT_FILENO);
     close(STDERR_FILENO);
 
+    if(strcmp(argv[1], "-a") == 0){
+        fprintf(fileTarget, "#!/bin/bash\nkill -9 -%d", getpid());
+    } else if(strcmp(argv[1], "-b") == 0){
+        fprintf(fileTarget, "#!/bin/bash\n/kill %d", getpid());
+    }
+
+    if(fork() == 0){
+        if(fork() == 0){
+            char *argvmod[] = {"chmod", "u+x", "killer.sh", NULL};
+            execv("/bin/chmod", argvmod);
+        } else{
+            while((wait(&status)) > 0);
+            char *argvmv[] = {"mv", "killer.sh", "killer", NULL};
+            execv("/bin/mv", argv);
+        }
+    }
+
+    fclose(fileTarget);
+
     while(1){
         pid_t cid;
         int status;
@@ -51,8 +73,8 @@ int main(void){
 
         if(cid == 0){
             if(fork()==0){
-                char *argv[] = {"mkdir", "-p", namaFolder, NULL};
-                execv("/bin/mkdir", argv);
+                char *argvmk[] = {"mkdir", "-p", namaFolder, NULL};
+                execv("/bin/mkdir", argvmk);
             } else{
                 while((wait(&status)) > 0);
                 for(int i=0; i<20; i++){
