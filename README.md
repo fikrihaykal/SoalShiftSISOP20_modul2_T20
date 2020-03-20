@@ -23,7 +23,7 @@ sesuai <br />
 - Program berjalan di background (daemon) <br />
 - Tidak boleh menggunakan fungsi system() <br />
 
-_ Contoh: ./program \* 34 7 /home/somi/test.sh _ <br />
+Contoh: ./program \* 34 7 /home/somi/test.sh <br />
 Program dengan argumen seperti contoh di atas akan menjalankan script test.sh setiap detik pada jam 07:34. <br />
 
 ### Pembahasan SOAL 1
@@ -32,13 +32,21 @@ Syntax : `cd Downloads/Modul2/soal1`
 - Membuat file <b>soal1.c</b> yang berisi program C<br />
 Syntax : `nano soal1.c` <br />
 ___source code : [soal1.c](https://github.com/fikrihaykal/SoalShiftSISOP20_modul2_T20/blob/master/soal1/soal1.c)___ <br />
-Penjelasan Script yang ada di dalam file <b>soal1.c</b> <br />
 - Compile program <br />
 Perintah `gcc nama_program.c -o nama_file_outputd` digunakan untuk mengcompile program C. <br />
 Syntax : `gcc soal1.c -o soal1` <br />
 - Menjalankan program <br />
 Perintah `./nama_file_outputd` digunakan untuk menjalankan program C. <br />
 Syntax : `./namafile detik menit jam lokasi_sh` <br />
+##### Penjelasan Script yang ada di dalam file <b>soal1.c</b> <br />
+- Fungsi utama dari program soal1.c <br /> 
+```
+int main(int argc, char **argv){
+    if(argc != 5){
+```
+Fungsi perintah `argc` sebagai parameter bertipe int dan berfungsi untuk menunjukkan banyaknya parameter yang digunakan. Sedangkan perintah `argv` bertipe char berfungsi untuk menyimpan parameter apa saja yang digunakan (dalam bentuk array). <br />
+##### Tampilan soal1 setelah dijalankan pada linux
+
 
 
 ## SOAL 2
