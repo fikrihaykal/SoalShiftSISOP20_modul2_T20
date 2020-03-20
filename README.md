@@ -33,12 +33,12 @@ Syntax : `cd Downloads/Modul2/soal1`
 Syntax : `nano soal1.c` <br />
 ___source code : [soal1.c](https://github.com/fikrihaykal/SoalShiftSISOP20_modul2_T20/blob/master/soal1/soal1.c)___ <br />
 Penjelasan Script yang ada di dalam file <b>soal1.c</b> <br />
-- Compile program
+- Compile program <br />
 Perintah `gcc nama_program.c -o nama_file_outputd` digunakan untuk mengcompile program C. <br />
-Syntax : `gcc soal1.c -o soal1`
-- Menjalankan program
-Perintah `./nama_file_outputd` digunakan untuk menjalankan program C.
-Syntax : `./namafile detik menit jam lokasi_sh`
+Syntax : `gcc soal1.c -o soal1` <br />
+- Menjalankan program <br />
+Perintah `./nama_file_outputd` digunakan untuk menjalankan program C. <br />
+Syntax : `./namafile detik menit jam lokasi_sh` <br />
 
 
 ## SOAL 2
@@ -50,7 +50,7 @@ Shisoppu mantappu! itulah yang selalu dikatakan Kiwa setiap hari karena sekarang
 - Kiwa menambahkan bahwa program utama bisa dirun dalam dua mode, yaitu MODE_A dan MODE_B. untuk mengaktifkan MODE_A, program harus dijalankan dengan argumen -a. Untuk MODE_B, program harus dijalankan dengan argumen -b. Ketika dijalankan dalam MODE_A, program utama akan langsung menghentikan semua operasinya ketika program killer dijalankan. Untuk MODE_B, ketika program killer dijalankan, program utama akan berhenti tapi membiarkan proses di setiap folder yang masih berjalan sampai selesai(semua folder terisi gambar, terzip lalu di delete).<br />
 
 Kiwa lalu terbangun dan sedih karena menyadari programnya hanya sebuah mimpi. <br />
-Buatlah program dalam mimpi Kiwa jadi nyata! <br /> <br />
+Buatlah program dalam mimpi Kiwa jadi nyata! <br />
 
 Catatan: <br />
 - Tidak boleh memakai system().
@@ -60,6 +60,9 @@ Hint: <br />
 - Gunakan fitur picsum.photos untuk mendapatkan gambar dengan ukuran
 tertentu
 - Epoch Unix bisa didapatkan dari time()
+
+### Pembahasan SOAL 2
+
 
 
 ## SOAL 3
