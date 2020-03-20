@@ -1,5 +1,5 @@
 # SoalShiftSISOP20_modul2_T20
-Praktikum Sistem Operasi 2020 - Modul 2
+Praktikum Sistem Operasi 2020 - Modul 2 <br />
 Departemen Teknologi Informasi
 
 Kelompok T20
@@ -23,7 +23,7 @@ sesuai <br />
 - Program berjalan di background (daemon) <br />
 - Tidak boleh menggunakan fungsi system() <br />
 
-Contoh: ./program \* 34 7 /home/somi/test.sh <br />
+_ Contoh: ./program \* 34 7 /home/somi/test.sh _ <br />
 Program dengan argumen seperti contoh di atas akan menjalankan script test.sh setiap detik pada jam 07:34. <br />
 
 ### Pembahasan SOAL 1
@@ -62,8 +62,17 @@ tertentu
 - Epoch Unix bisa didapatkan dari time()
 
 ### Pembahasan SOAL 2
+- Masuk ke directory soal 2 <br />
+Syntax : `cd ../soal2`
+- Membuat file <b>soal2.c</b> yang berisi program C<br />
+Syntax : `nano soal2.c` <br />
+___source code : [soal2.c](https://github.com/fikrihaykal/SoalShiftSISOP20_modul2_T20/blob/master/soal2/soal2.c)___ <br />
+Penjelasan Script yang ada di dalam file <b>soal2.c</b> <br />
 
-
+- Compile program <br />
+Syntax : `gcc soal2.c -o soal2` <br />
+- Menjalankan program <br />
+Syntax : `./soal2`
 
 ## SOAL 3
 Jaya adalah seorang programmer handal mahasiswa informatika. Suatu hari dia memperoleh tugas yang banyak dan berbeda tetapi harus dikerjakan secara bersamaan (multiprocessing). <br />
@@ -81,6 +90,19 @@ Catatan : <br />
 - Tidak boleh memakai function C mkdir() ataupun rename().
 - Gunakan exec dan fork
 - Direktori “.” dan “..” tidak termasuk
+
+### Pembahasan SOAL 
+- Masuk ke directory soal 3 <br />
+Syntax : `cd ../soal3`
+- Membuat file <b>soal3.c</b> yang berisi program C<br />
+Syntax : `nano soal2.c` <br />
+___source code : [soal3.c](https://github.com/fikrihaykal/SoalShiftSISOP20_modul2_T20/blob/master/soal3/soal3.c)___ <br />
+Penjelasan Script yang ada di dalam file <b>soal3.c</b> <br />
+
+- Compile program <br />
+Syntax : `gcc soal3.c -o soal3` <br />
+- Menjalankan program <br />
+Syntax : `./soal3`
 
 
 ## Kendala
