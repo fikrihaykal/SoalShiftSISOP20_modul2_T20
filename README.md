@@ -22,8 +22,9 @@ sesuai <br />
 - Program hanya menerima 1 config cron <br />
 - Program berjalan di background (daemon) <br />
 - Tidak boleh menggunakan fungsi system() <br /> <br />
-*Contoh: ./program \* 34 7 /home/somi/test.sh <br />
-*Program dengan argumen seperti contoh di atas akan menjalankan script test.sh setiap detik pada jam 07:34. <br />
+
+Contoh: ./program \* 34 7 /home/somi/test.sh <br />
+Program dengan argumen seperti contoh di atas akan menjalankan script test.sh setiap detik pada jam 07:34. <br />
 
 ### SOAL 2
 Shisoppu mantappu! itulah yang selalu dikatakan Kiwa setiap hari karena sekarang dia merasa sudah jago materi sisop. Karena merasa jago, suatu hari Kiwa iseng membuat sebuah program. <br />
@@ -34,10 +35,11 @@ Shisoppu mantappu! itulah yang selalu dikatakan Kiwa setiap hari karena sekarang
 - Kiwa menambahkan bahwa program utama bisa dirun dalam dua mode, yaitu MODE_A dan MODE_B. untuk mengaktifkan MODE_A, program harus dijalankan dengan argumen -a. Untuk MODE_B, program harus dijalankan dengan argumen -b. Ketika dijalankan dalam MODE_A, program utama akan langsung menghentikan semua operasinya ketika program killer dijalankan. Untuk MODE_B, ketika program killer dijalankan, program utama akan berhenti tapi membiarkan proses di setiap folder yang masih berjalan sampai selesai(semua folder terisi gambar, terzip lalu di delete).<br />
 Kiwa lalu terbangun dan sedih karena menyadari programnya hanya sebuah mimpi. <br />
 Buatlah program dalam mimpi Kiwa jadi nyata! <br /> <br />
-*Catatan: <br />
+
+Catatan: <br />
 - Tidak boleh memakai system().
 - Program utama harus ter-detach dari terminal <br />
-*Hint: <br />
+Hint: <br />
 - Gunakan fitur picsum.photos untuk mendapatkan gambar dengan ukuran
 tertentu
 - Epoch Unix bisa didapatkan dari time()
