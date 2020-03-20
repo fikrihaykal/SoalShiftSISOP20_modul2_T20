@@ -37,10 +37,11 @@ Perintah `gcc nama_program.c -o nama_file_outputd` digunakan untuk mengcompile p
 Syntax : `gcc soal1.c -o soal1` <br />
 - Menjalankan program <br />
 Perintah `./nama_file_outputd` digunakan untuk menjalankan program C. <br />
-Syntax : `./namafile detik menit jam lokasi_sh` <br />
+Syntax : `./namafile detik menit jam lokasi.sh` <br />
+
 
 ##### Penjelasan Script yang ada di dalam file _soal1.c_ <br />
-1. Fungsi untuk mengecek apakah argumen merupakan angka. <br /> 
+Fungsi untuk mengecek apakah argumen merupakan angka. <br /> 
 ```
 int cekAngka(char temp[]){
     for(int i=0; i<strlen(temp); i++){
@@ -52,23 +53,30 @@ int cekAngka(char temp[]){
     return 1;
 }
 ```
-- Fungsi `strlen()` digunakan untuk menghitung panjang string. <br />
-2. Fungsi utama dari program <b>soal1.c</b>. 
+- Perintah `strlen()` digunakan untuk menghitung panjang string. <br />
+
+Fungsi utama dari program <b>soal1.c</b>. 
 ```
 int main(int argc, char **argv){
     if(argc != 5){
 ```
 - Perintah `argc` sebagai parameter bertipe int dan berfungsi untuk menunjukkan banyaknya parameter yang digunakan. 
 - Perintah `argv` bertipe char berfungsi untuk menyimpan parameter apa saja yang digunakan (dalam bentuk array). <br />
-3. Mengecek jumlah argumen
+
+Mengecek jumlah argumen
 ```
 printf("Argumen anda salah\n");
         exit(EXIT_FAILURE);
     } else{
         int jadwal[4];
 ```
-4. Perintah `for(int i=1; i<4; i++){` berfungsi untuk Mengecek apakah argumen benar dengan memanggil fungsi cekAsterisk() dan cekAngka(). <br /> 
-5. Mengecek apakah argumen adalah asterisk. 
+
+Mengecek apakah argumen benar dengan memanggil fungsi cekAsterisk() dan cekAngka(). <br /> 
+```
+for(int i=1; i<4; i++){
+```
+
+Mengecek apakah argumen adalah asterisk. 
 ```
               if(strcmp(argv[i], "*")){
                 jadwal[i] = -5;
@@ -79,8 +87,9 @@ printf("Argumen anda salah\n");
                 exit(EXIT_FAILURE);
             }
 ```
-- Fungsi `strcmp()` digunakan untuk membandingkan string dengan string yang lainnya. <br />
-6. Membuat <b>Daemon</b>, langkah pertama yaitu membuat sebuah parent process dan memunculkan child process dengan melakukan `fork()`
+- Perintah `strcmp()` digunakan untuk membandingkan string dengan string yang lainnya. <br />
+
+Membuat <b>Daemon</b>, langkah pertama yaitu membuat sebuah parent process dan memunculkan child process dengan melakukan `fork()`
 ```
         pid_t pid, sid;
         pid = fork();
@@ -105,8 +114,9 @@ printf("Argumen anda salah\n");
 - `if(pid < 0){` mendeklarasikan bahwa nilai variabel pid < 0. `exit(EXIT_FAILURE);` berfungsi untuk keluar saat fork gagal.
 - `exit(EXIT_SUCCESS)` berfungsi untuk keluar saat fork berhasil. `if(pid > 0)` mendeklarasikan bahwa nilai variabel pid adalah PID dari child process)
 - `umask` berfungsi untuk mengatur permission dari suatu file pada saat file itu dibuat. Kita mengatur nilai `umask(0)` agar kita mendapatkan akses full terhadap file yang dibuat oleh daemon.
-- Perintah `setsid()` berfungsi untuk mendapatkan SID. Perintah ini memiliki return type yang sama dengan perintah `fork()`.
-7. Proses Daemon adalah proses yang berjalan di background secara otomatis. Oleh sebab itu kita harus menutup file descriptor standar (file yang tidak diperlukan). 
+- Perintah `setsid()` berfungsi untuk mendapatkan SID. Perintah ini memiliki return type yang sama dengan perintah `fork()`. <br />
+
+Proses Daemon adalah proses yang berjalan di background secara otomatis. Oleh sebab itu kita harus menutup file descriptor standar (file yang tidak diperlukan). 
 ```
         close(STDIN_FILENO);
         close(STDOUT_FILENO);
@@ -115,7 +125,8 @@ printf("Argumen anda salah\n");
 - STDIN (standar input) berfungsi untuk menutup/ mencegah membaca data dari I/O. 
 - STDOUT (standar output) berfungsi untuk menutup/mencegah menampilkan I/O ke layar. 
 - STDERR (standar error) berfungsi untuk menutup/mecegah menampilkan pesan error ke layar.
-8. Looping utama fungsi daemon
+
+Looping utama fungsi daemon
 ```
     while(1){
         time_t t = time(NULL);
@@ -135,6 +146,7 @@ printf("Argumen anda salah\n");
 - Perintah `((tm.tm_hour == jam) || (jam == -5)) && ((tm.tm_min == menit) || (menit == -5)) && ((tm.tm_sec == detik) || (detik == -5))` berfungsi untuk menyamakan detik, menit, dan jam yang diinputkan oleh pengguna dengan jam, menit, dan detik pada saat program dijalankan. lalu Daemon akan berjalan sesuai dengan perintah yang telah diinputkan.
 - Apabila kondisi perintah telah sesuai, maka program akan menjalankan bash script pada file yang telah dibuat dengan perintah `execl("/bin/bash", "bash", argv[4], NULL);`. 
 - Perintah `sleep(1)` akan memberhentikan program selama 1 detik. Setelah itu program akan melakukan looping kembali.
+
 
 ##### Tampilan soal1 setelah dijalankan pada linux
 
