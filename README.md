@@ -39,6 +39,7 @@ Buatlah program dalam mimpi Kiwa jadi nyata! <br /> <br />
 Catatan: <br />
 - Tidak boleh memakai system().
 - Program utama harus ter-detach dari terminal <br />
+
 Hint: <br />
 - Gunakan fitur picsum.photos untuk mendapatkan gambar dengan ukuran
 tertentu
