@@ -31,16 +31,21 @@ Program dengan argumen seperti contoh di atas akan menjalankan script test.sh se
 Syntax : `cd Downloads/Modul2/soal1`
 - Membuat file <b>soal1.c</b> <br />
 Syntax : `nano soal1.c` <br />
-___source code : [soal1.c](https://github.com/fikrihaykal/SoalShiftSISOP20_modul2_T20/blob/master/soal1/soal1.c)___
+___source code : [soal1.c](https://github.com/fikrihaykal/SoalShiftSISOP20_modul2_T20/blob/master/soal1/soal1.c)___ <br />
 Penjelasan Script yang ada di dalam file <b>soal1.c</b> <br />
 Mengecek jumlah argumen
-`printf("Argumen anda salah\n");
+```
+printf("Argumen anda salah\n");
         exit(EXIT_FAILURE);
 } else{
-        int jadwal[4];`
+        int jadwal[4];
+```
 Mengecek apakah argumen benar dengan memanggil fungsi cekAsterisk() dan cekAngka()
-`for(int i=1; i<4; i++){
-        	char temp[] = argv[i];`
+```
+for(int i=1; i<4; i++){
+        	char temp[] = argv[i];
+```
+                
 
 ## SOAL 2
 Shisoppu mantappu! itulah yang selalu dikatakan Kiwa setiap hari karena sekarang dia merasa sudah jago materi sisop. Karena merasa jago, suatu hari Kiwa iseng membuat sebuah program. <br />
