@@ -9,6 +9,17 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 
+//Fungsi untuk mengecek apakah argumen merupakan angka
+int cekAngka(char temp[]){
+    for(int i=0; i<strlen(temp); i++){
+        if((temp[i] < '0') || (temp[i] > '9')){
+            return 0;
+            break;
+        }
+    }
+    return 1;
+}
+
 //Fungsi utama
 int main(int argc, char **argv){
     if(argc != 5){
@@ -20,20 +31,16 @@ int main(int argc, char **argv){
 
         //Mengecek apakah argumen benar dengan memanggil fungsi cekAsterisk() dan cekAngka()
         for(int i=1; i<4; i++){
-        	char temp[] = argv[i];
+        	//char temp[] = argv[i];
         	
         	//Mengecek apakah argumen adalah asterisk
-            if((strlen(temp) == 1) && (temp[0] == '*'))){
+            if(strcmp(argv[i], "*")){
                 jadwal[i] = -5;
+            } else if(cekAngka(argv[i])){
+                jadwal[i] = atoi(argv[i]);
             } else{
-            	
-            	//Mengecek apakah argumen bukan sebuah nomor
-            	for(int i=0; i<strlen(temp); i++){
-            		if((temp[i]) < '0') || (temp[i] > '9')){
-            			printf("Argumen anda salah\n");
-            			exit(EXIT_FAILURE);
-					}
-				}
+                printf("Argumen anda salah\n");
+                exit(EXIT_FAILURE);
             }
         }
 
@@ -75,17 +82,16 @@ int main(int argc, char **argv){
         //Looping utama fungsi daemon
         while(1){
             time_t t = time(NULL);
-            sturct tm tm = *localtime(&t);
+            struct tm tm = *localtime(&t);
 
-            if(((tm.tm_hour == jam) || (jam == -5)) && ((tm.tm_min == menit) || (menit == -5)) && ((tm.tm_sec == detik) || (detik == -5))){  
-                if(fork() == 0){
-                    char *argvv = {"bash", argv[4], NULL};
-                    execv("/bin/bash", argvv);
-                }
-                while(wait(NULL) > 0);
-            }
+	            if(((tm.tm_hour == jam) || (jam == -5)) && ((tm.tm_min == menit) || (menit == -5)) && ((tm.tm_sec == detik) || (detik == -5))){
+	                if(fork()==0){
+		            execl("/bin/bash", "bash", argv[4], NULL);
+		            sleep(1);
+		        }
 
-            sleep(1);
+	            }
+
         }
     }
 }
