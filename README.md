@@ -21,10 +21,11 @@ d. Path file .sh <br />
 sesuai <br />
 - Program hanya menerima 1 config cron <br />
 - Program berjalan di background (daemon) <br />
-- Tidak boleh menggunakan fungsi system() <br /> <br />
+- Tidak boleh menggunakan fungsi system() <br />
 
 Contoh: ./program \* 34 7 /home/somi/test.sh <br />
 Program dengan argumen seperti contoh di atas akan menjalankan script test.sh setiap detik pada jam 07:34. <br />
+
 
 ### SOAL 2
 Shisoppu mantappu! itulah yang selalu dikatakan Kiwa setiap hari karena sekarang dia merasa sudah jago materi sisop. Karena merasa jago, suatu hari Kiwa iseng membuat sebuah program. <br />
@@ -44,6 +45,25 @@ Hint: <br />
 - Gunakan fitur picsum.photos untuk mendapatkan gambar dengan ukuran
 tertentu
 - Epoch Unix bisa didapatkan dari time()
+
+
+### SOAL 3
+Jaya adalah seorang programmer handal mahasiswa informatika. Suatu hari dia memperoleh tugas yang banyak dan berbeda tetapi harus dikerjakan secara bersamaan (multiprocessing). <br />
+- Program buatan jaya harus bisa membuat dua direktori di “/home/[USER]/modul2/”. Direktori yang pertama diberi nama “indomie”, lalu
+lima detik kemudian membuat direktori yang kedua bernama “sedaap”.
+- Kemudian program tersebut harus meng-ekstrak file jpg.zip di direktori “/home/[USER]/modul2/”. Setelah tugas sebelumnya selesai, ternyata tidak hanya itu tugasnya.
+- Diberilah tugas baru yaitu setelah di ekstrak, hasil dari ekstrakan tersebut (di dalam direktori “home/[USER]/modul2/jpg/”) harus dipindahkan sesuai dengan pengelompokan, semua file harus dipindahkan ke “/home/[USER]/modul2/sedaap/” dan semua direktori harus dipindahkan ke “/home/[USER]/modul2/indomie/”.
+- Untuk setiap direktori yang dipindahkan ke “/home/[USER]/modul2/indomie/” harus membuat dua file kosong. File yang pertama diberi nama “coba1.txt”, lalu 3 detik kemudian membuat file bernama “coba2.txt”. (contoh : “/home/[USER]/modul2/indomie/{nama_folder}/coba1.txt”). <br />
+
+Karena Jaya terlalu banyak tugas dia jadi stress, jadi bantulah Jaya agar bisa membuat
+program tersebut. <br />
+
+Catatan : <br />
+- Tidak boleh memakai system().
+- Tidak boleh memakai function C mkdir() ataupun rename().
+- Gunakan exec dan fork
+- Direktori “.” dan “..” tidak termasuk
+
 
 ## Kendala
 - Bobot soal terlalu sulit
