@@ -26,7 +26,7 @@ sesuai <br />
 Contoh: ./program \* 34 7 /home/somi/test.sh <br />
 Program dengan argumen seperti contoh di atas akan menjalankan script test.sh setiap detik pada jam 07:34. <br />
 
-### Pembahasan SOAL 1
+### Penyelesaian SOAL 1
 - Masuk ke directory soal 1 <br />
 Syntax : `cd Downloads/Modul2/soal1`
 - Membuat file <b>soal1.c</b> yang berisi program C<br />
@@ -105,15 +105,19 @@ Mengecek apakah argumen adalah asterisk.
         if((jadwal[1] >= 60) || (jadwal[2] >= 60) || (jadwal[3]) >= 24){
             printf("Argumen anda salah\n");
             exit(EXIT_FAILURE);
-        }
-
-        int jam, menit, detik;
-        jam = jadwal[3];
-        menit = jadwal[2];
-        detik = jadwal[1];	    
+        }	    
 ```
 - Perintah `strcmp()` digunakan untuk membandingkan string dengan string yang lainnya. <br />
-
+- Pada soal ada 5 argumen, karena `./program/` terhitung menjadi argumen. Apabila jumlah argumen kurang dari 5 `jadwal[i] = -5`, maka program tidak akan berjalan `printf("Argumen anda salah\n")`.
+- Perintah `jadwal[i] = atoi(argv[i])`, `atoi` berfungsi untuk mengonversi nilai string menjadi bilangan bertipe integer. Jika kondisi-kondisi tersebut tidak terpenuhi, maka argumen yang tersimpan dalam variabel `argv[i]` akan disimpan dalam variabel `jadwal[i]`.
+- Perintah `(if((jadwal[1] >= 60) || (jadwal[2] >= 60) || (jadwal[3]) >= 24)` digunakan untuk mengecekan argumen yang tersimpan dalam variabel Detik, Menit, Jam.
+- Pada program akan diminta argumen dari `jam`, `menit` dan `detik`. Maka diperlukan adanya inisialisasi argumen awal untuk ketiga variabel tersebut :
+```
+	int jam, menit, detik;
+        jam = jadwal[3];
+        menit = jadwal[2];
+        detik = jadwal[1];
+```
 Membuat <b>Daemon</b>, langkah pertama yaitu membuat sebuah parent process dan memunculkan child process dengan melakukan `fork()`
 ```
         pid_t pid, sid;
@@ -173,8 +177,11 @@ Looping utama fungsi daemon
 - Perintah `sleep(1)` akan memberhentikan program selama 1 detik. Setelah itu program akan melakukan looping kembali.
 
 
-##### Tampilan soal1 setelah dijalankan pada linux
-
+##### Tampilan _soal1_ setelah dijalankan pada linux
+- Tampilan jika berhasil 
+![WhatsApp Image 2020-03-21 at 09 21 44](https://user-images.githubusercontent.com/16980689/77217522-d0eff380-6b55-11ea-9fd8-7c2aac235fc6.jpeg) <br />
+-Tampilan jika input salah
+![WhatsApp Image 2020-03-21 at 09 21 45](https://user-images.githubusercontent.com/16980689/77217561-1dd3ca00-6b56-11ea-9737-5ae31b9248fa.jpeg)
 
 
 ## SOAL 2
@@ -197,7 +204,7 @@ Hint: <br />
 tertentu
 - Epoch Unix bisa didapatkan dari time()
 
-### Pembahasan SOAL 2
+### Penyelesaian SOAL 2
 - Masuk ke directory soal 2 <br />
 Syntax : `cd ../soal2`
 - Membuat file <b>soal2.c</b> yang berisi program C<br />
@@ -381,6 +388,9 @@ Mengzip dan menghapus folder setelah terdownload 20 foto
 - Perintah `execv("/bin/rm", argvdel);` digunakan untuk menghapus folder setelah membuat ZIP.<br />
 - Sebelum membuat folder lagi, proses akan disleep terlebih dahulu selama 30 detik.<br />
 
+##### Tampilan _soal2_ setelah dijalankan pada linux
+![WhatsApp Image 2020-03-21 at 09 21 44 (1)](https://user-images.githubusercontent.com/16980689/77217665-b5d1b380-6b56-11ea-8a65-20c6014d0f8c.jpeg)
+
 
 ## SOAL 3
 Jaya adalah seorang programmer handal mahasiswa informatika. Suatu hari dia memperoleh tugas yang banyak dan berbeda tetapi harus dikerjakan secara bersamaan (multiprocessing). <br />
@@ -399,19 +409,18 @@ Catatan : <br />
 - Gunakan exec dan fork
 - Direktori “.” dan “..” tidak termasuk
 
-### Pembahasan SOAL 
+### Penyelesaian SOAL 
 - Masuk ke directory soal 3 <br />
 Syntax : `cd ../soal3`
 - Membuat file <b>soal3.c</b> yang berisi program C<br />
 Syntax : `nano soal2.c` <br />
 ___source code : [soal3.c](https://github.com/fikrihaykal/SoalShiftSISOP20_modul2_T20/blob/master/soal3/soal3.c)___ <br />
-Penjelasan Script yang ada di dalam file <b>soal3.c</b> <br />
-
 - Compile program <br />
 Syntax : `gcc soal3.c -o soal3` <br />
 - Menjalankan program <br />
 Syntax : `./soal3`
 
+##### Penjelasan Script yang ada di dalam file <b>soal3.c</b> <br />
 Memasukkan library untuk digunakan dalam fungsi main.<br />
 ```
 #include <stdio.h>
@@ -545,6 +554,9 @@ else{
 ```
 - Fungsi `sleep(3);` digunakan sebagay _delay_ sebelum membuat file `coba2.txt`.<br />
 - Fungsi `execl("....");` digunakan untuk mencari seluruh folder yang telah dipindahkan kedalam folder `indomie` dengan command `find` lalu membuat file `coba2.txt` menggunakan command `touch` pada folder tersebut.<br />
+
+##### Tampilan _soal3_ setelah dijalankan pada linux
+![WhatsApp Image 2020-03-21 at 09 21 44 (2)](https://user-images.githubusercontent.com/16980689/77217681-d994f980-6b56-11ea-8ef3-9f98c8e60315.jpeg)
 
 
 ## Kendala
