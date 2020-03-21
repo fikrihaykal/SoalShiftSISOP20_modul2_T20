@@ -9,10 +9,7 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 
-int main(void){
-    FILE *fileTarget;
-    fileTarget = fopen("killer.sh", "w");
-    int status;
+int main(int argc, char *argv[]){
     pid_t pid, sid;
     pid = fork();
 
@@ -24,36 +21,42 @@ int main(void){
         exit(EXIT_SUCCESS);
     }
 
-    umask(0);
-
     sid = setsid();
 
     if(sid < 0){
         exit(EXIT_FAILURE);
     }
 
-    close(STDIN_FILENO);
-    close(STDOUT_FILENO);
-    close(STDERR_FILENO);
+    FILE *fileTarget;
+    fileTarget = fopen("killer.sh", "w");
 
     if(strcmp(argv[1], "-a") == 0){
-        fprintf(fileTarget, "#!/bin/bash\nkill -9 -%d", getpid());
-    } else if(strcmp(argv[1], "-b") == 0){
-        fprintf(fileTarget, "#!/bin/bash\n/kill %d", getpid());
+        fprintf(fileTarget, "#!/bin/bash\nkill -9 -%d\nrm killer", sid);
     }
 
-    if(fork() == 0){
-        if(fork() == 0){
-            char *argvmod[] = {"chmod", "u+x", "killer.sh", NULL};
-            execv("/bin/chmod", argvmod);
-        } else{
-            while((wait(&status)) > 0);
-            char *argvmv[] = {"mv", "killer.sh", "killer", NULL};
-            execv("/bin/mv", argv);
-        }
+    if(strcmp(argv[1], "-b") == 0){
+        fprintf(fileTarget, "#!/bin/bash\nkill -9 %d\nrm killer", getpid());
     }
 
     fclose(fileTarget);
+
+    pid = fork();
+    if(pid == 0){
+        char *argvmod[] = {"chmod", "u+x", "killer.sh", NULL};
+        execv("/bin/chmod", argvmod);
+    }
+    while((wait(NULL)) != pid);
+    
+    pid = fork();
+    if(pid == 0){
+        char *argvmv[] = {"mv", "killer.sh", "killer", NULL};
+        execv("/bin/mv", argvmv);
+    }
+    while((wait(NULL)) != pid);
+
+    close(STDIN_FILENO);
+    close(STDOUT_FILENO);
+    close(STDERR_FILENO);
 
     while(1){
         pid_t cid;
@@ -99,19 +102,13 @@ int main(void){
                     sleep(5);
                 }
 
-                if(fork() == 0){
-                    char namaFolderZIP[64];
-                    sprintf(namaFolderZIP, "%s.zip", namaFolder);
+                char namaFolderZIP[64];
+                sprintf(namaFolderZIP, "%s.zip", namaFolder);
 
-                    char *argvzip[] = {"zip", "-q", namaFolderZIP, namaFolder, NULL};
-                    execv("/usr/bin/zip", argvzip);
-                } else{
-                    while((wait(&status)) > 0);
-                    char *argvdel[] = {"rm", "-d", "-R", namafolder, NULL};
-                    execv("/bin/rm", argvdel);
+                char *argvzip[] = {"zip", "-qrm", namaFolderZIP, namaFolder, NULL};
+                execv("/usr/bin/zip", argvzip);
             }
-        } else{
-            sleep(30);
         }
+        sleep(30);
     }
 }
