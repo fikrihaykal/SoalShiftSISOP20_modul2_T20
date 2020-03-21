@@ -100,6 +100,17 @@ Mengecek apakah argumen adalah asterisk.
                 printf("Argumen anda salah\n");
                 exit(EXIT_FAILURE);
             }
+	}
+
+        if((jadwal[1] >= 60) || (jadwal[2] >= 60) || (jadwal[3]) >= 24){
+            printf("Argumen anda salah\n");
+            exit(EXIT_FAILURE);
+        }
+
+        int jam, menit, detik;
+        jam = jadwal[3];
+        menit = jadwal[2];
+        detik = jadwal[1];	    
 ```
 - Perintah `strcmp()` digunakan untuk membandingkan string dengan string yang lainnya. <br />
 
