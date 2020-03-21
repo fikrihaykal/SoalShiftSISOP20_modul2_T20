@@ -192,8 +192,6 @@ Syntax : `cd ../soal2`
 - Membuat file <b>soal2.c</b> yang berisi program C<br />
 Syntax : `nano soal2.c` <br />
 ___source code : [soal2.c](https://github.com/fikrihaykal/SoalShiftSISOP20_modul2_T20/blob/master/soal2/soal2.c)___ <br />
-Penjelasan Script yang ada di dalam file <b>soal2.c</b> <br />
-
 - Compile program <br />
 Syntax : `gcc soal2.c -o soal2` <br />
 - Menjalankan program <br />
