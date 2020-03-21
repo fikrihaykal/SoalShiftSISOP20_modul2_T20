@@ -200,6 +200,7 @@ Library yang akan digunakan untuk algoritma di dalam fungsi main. <br />
 #include <sys/stat.h>
 ```
 
+
 Deklarasi variabel serta memulai proses `fork();` <br /> 
 ```
     FILE *fileTarget;
@@ -210,6 +211,7 @@ Deklarasi variabel serta memulai proses `fork();` <br />
 ```
 - Perintah `fileTarget = fopen("killer.sh", "w");` digunakan untuk membuat file `killer.sh`.<br />
 - Perintah `fork()` digunakan untuk membuat _child process_ baru. <br />
+
 
 
 Mengecek apakah perintah `fork();` berhasil membuat _child process_.<br /> 
@@ -238,6 +240,7 @@ Mengecek apakah perintah `fork();` berhasil membuat _child process_.<br />
 - Perintah `if(sid < 0)` digunakan jika _session ID_ gagal dibuat.<br />
 - Perintah lainnya sesuai dengan template yang ada di modul materi.<br />
 
+
 Membaca argumen sebagai perintah `bash` yang akan disimpan pada file `killer.sh`
 ```
     if(strcmp(argv[1], "-a") == 0){
@@ -249,6 +252,7 @@ Membaca argumen sebagai perintah `bash` yang akan disimpan pada file `killer.sh`
 - Fungsi tersebut akan menyimpan arguman `bash` ke dalam file `killer.sh`.<br />
 - Jika argumennya adalah `-a` maka akan menyimpan `#!/bin/bash kill -9 -%d` dimana `%d` adalah _process ID_.<br />
 - Jika argumennya adalah `-b` maka akan menyimpan `#!/bin/bash kill -%d` dimana `%d` adalah _process ID_.<br />
+
 
 Menjalankan file `killer.sh`<br />
 ```
@@ -268,6 +272,7 @@ Menjalankan file `killer.sh`<br />
 - Fungsi `execv("/bin/chmod", argvmod);` digunakan untuk menambah atau mengedit hak akses file `killer.sh` oleh sistem.<br />
 - Fungsi `execv("/bin/mv", argvmv);` digunakan untuk mengganti nama file `killer.sh` menjadi `killer`.<br />
 - Fungsi `fclose(fileTarget);` digunakan untuk menutup kembali file `killer.sh`.<br />
+
 
 Deklarasi variabel dan mengambil localtime
 ```
@@ -289,6 +294,7 @@ Deklarasi variabel dan mengambil localtime
 ```
 - Fungsi `strftime(namaFolder, 64, "%Y-%m-%d_%H:%M:%S", tm);` digunakan untuk menyimpan localtime pada variabel `namaFolder`.<br />
 
+
 Membuat folder berdasarkan variabel `namaFolder`.<br />
 ```
  	if(cid == 0){
@@ -298,6 +304,7 @@ Membuat folder berdasarkan variabel `namaFolder`.<br />
             } 
 ```
 - Perintah `execv("/bin/mkdir", argvmk);` digunakan untuk membuat folder baru berdasarkan variabel `namaFolder`.<br />
+
 
 Mendownload foto dan disimpan dengan local time.<br />
 ```
@@ -329,6 +336,7 @@ Mendownload foto dan disimpan dengan local time.<br />
 - Variabel `namaFile` digunakan sebagai nama hasil foto yang didownload.<br />
 - Perintah `execv("/usr/bin/wget", argvv);` digunakan untuk mendownload foto yang direpetisi sebanyak 20 kali dengan menggunakan fungsi `for(int=0; i<20; i++)`.<br />
 
+
 Mengzip dan menghapus folder setelah terdownload 20 foto
 ```
                 if(fork() == 0){
@@ -349,6 +357,7 @@ Mengzip dan menghapus folder setelah terdownload 20 foto
 - Perintah `execv("/usr/bin/zip", argvzip);` digunakan untuk membuat ZIP berdasarkan variabel `namaFolder`.<br />
 - Perintah `execv("/bin/rm", argvdel);` digunakan untuk menghapus folder setelah membuat ZIP.<br />
 - Sebelum membuat folder lagi, proses akan disleep terlebih dahulu selama 30 detik.<br />
+
 
 ## SOAL 3
 Jaya adalah seorang programmer handal mahasiswa informatika. Suatu hari dia memperoleh tugas yang banyak dan berbeda tetapi harus dikerjakan secara bersamaan (multiprocessing). <br />
