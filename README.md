@@ -185,6 +185,71 @@ Syntax : `gcc soal2.c -o soal2` <br />
 - Menjalankan program <br />
 Syntax : `./soal2`
 
+##### Penjelasan Script yang ada di dalam file _soal2.c_ <br />
+Library yang akan digunakan untuk algoritma di dalam fungsi main. <br /> 
+```
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <errno.h>
+#include <unistd.h>
+#include <time.h>
+#include <syslog.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <sys/stat.h>
+```
+
+Deklarasi variabel serta memulai proses `fork();` <br /> 
+```
+    FILE *fileTarget;
+    fileTarget = fopen("killer.sh", "w");
+    int status;
+    pid_t pid, sid;
+    pid = fork();
+```
+- Perintah `fileTarget = fopen("killer.sh", "w");` digunakan untuk membuat file `killer.sh`.<br />
+- Perintah `fork()` digunakan untuk membuat _child process_ baru. <br />
+
+
+Mengecek apakah perintah `fork();` berhasil membuat _child process_.<br /> 
+```
+    if(pid < 0){
+        exit(EXIT_FAILURE);
+    }
+
+    if(pid > 0){
+        exit(EXIT_SUCCESS);
+    }
+
+    umask(0);
+
+    sid = setsid();
+
+    if(sid < 0){
+        exit(EXIT_FAILURE);
+    }
+
+    close(STDIN_FILENO);
+    close(STDOUT_FILENO);
+    close(STDERR_FILENO);
+```
+- Perintah `if(pid < 0)` digunakan jika _child process_ gagal dibuat.<br />
+- Perintah `if(sid < 0)` digunakan jika _session ID_ gagal dibuat.<br />
+- Perintah lainnya sesuai dengan template yang ada di modul materi.<br />
+
+Membaca argumen sebagai perintah `bash` yang akan disimpan pada file `killer.sh`
+```
+    if(strcmp(argv[1], "-a") == 0){
+        fprintf(fileTarget, "#!/bin/bash\nkill -9 -%d", getpid());
+    } else if(strcmp(argv[1], "-b") == 0){
+        fprintf(fileTarget, "#!/bin/bash\n/kill %d", getpid());
+    }
+```
+- Fungsi tersebut akan menyimpan arguman `bash` ke dalam file `killer.sh`.<br />
+- Jika argumennya adalah `-a` maka akan menyimpan `#!/bin/bash kill -9 -%d` dimana `%d` adalah _process ID_.<br />
+- Jika argumennya adalah `-b` maka akan menyimpan `#!/bin/bash kill -%d` dimana `%d` adalah _process ID_.<br />
+
 ## SOAL 3
 Jaya adalah seorang programmer handal mahasiswa informatika. Suatu hari dia memperoleh tugas yang banyak dan berbeda tetapi harus dikerjakan secara bersamaan (multiprocessing). <br />
 - Program buatan jaya harus bisa membuat dua direktori di “/home/[USER]/modul2/”. Direktori yang pertama diberi nama “indomie”, lalu
