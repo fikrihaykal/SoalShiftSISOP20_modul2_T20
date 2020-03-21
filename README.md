@@ -250,6 +250,106 @@ Membaca argumen sebagai perintah `bash` yang akan disimpan pada file `killer.sh`
 - Jika argumennya adalah `-a` maka akan menyimpan `#!/bin/bash kill -9 -%d` dimana `%d` adalah _process ID_.<br />
 - Jika argumennya adalah `-b` maka akan menyimpan `#!/bin/bash kill -%d` dimana `%d` adalah _process ID_.<br />
 
+Menjalankan file `killer.sh`<br />
+```
+    if(fork() == 0){
+        if(fork() == 0){
+            char *argvmod[] = {"chmod", "u+x", "killer.sh", NULL};
+            execv("/bin/chmod", argvmod);
+        } else{
+            while((wait(&status)) > 0);
+            char *argvmv[] = {"mv", "killer.sh", "killer", NULL};
+            execv("/bin/mv", argvmv);
+        }
+    }
+
+    fclose(fileTarget);
+```
+- Fungsi `execv("/bin/chmod", argvmod);` digunakan untuk menambah atau mengedit hak akses file `killer.sh` oleh sistem.<br />
+- Fungsi `execv("/bin/mv", argvmv);` digunakan untuk mengganti nama file `killer.sh` menjadi `killer`.<br />
+- Fungsi `fclose(fileTarget);` digunakan untuk menutup kembali file `killer.sh`.<br />
+
+Deklarasi variabel dan mengambil localtime
+```
+    while(1){
+        pid_t cid;
+        int status;
+        
+        time_t t = time(NULL);
+        struct tm* tm = localtime(&t);
+
+        char namaFolder[64];
+        strftime(namaFolder, 64, "%Y-%m-%d_%H:%M:%S", tm);
+        
+        cid = fork();
+
+        if(cid < 0){
+            exit(EXIT_FAILURE);
+        }
+```
+- Fungsi `strftime(namaFolder, 64, "%Y-%m-%d_%H:%M:%S", tm);` digunakan untuk menyimpan localtime pada variabel `namaFolder`.<br />
+
+Membuat folder berdasarkan variabel `namaFolder`.<br />
+```
+ 	if(cid == 0){
+            if(fork()==0){
+                char *argvmk[] = {"mkdir", "-p", namaFolder, NULL};
+                execv("/bin/mkdir", argvmk);
+            } 
+```
+- Perintah `execv("/bin/mkdir", argvmk);` digunakan untuk membuat folder baru berdasarkan variabel `namaFolder`.<br />
+
+Mendownload foto dan disimpan dengan local time.<br />
+```
+	else{
+                while((wait(&status)) > 0);
+                for(int i=0; i<20; i++){
+                    if(fork()==0){
+                        if(chdir(namaFolder) < 0){
+                            exit(EXIT_FAILURE);
+                        }
+                        
+                        int cnt;
+                        cnt = (int) time(NULL);
+                        cnt = (cnt % 1000) + 100;
+                        time_t tcount = time(NULL);
+                        struct tm* tmcount = localtime(&tcount);
+
+                        char alamatDownload[48], namaFile[64];
+                        sprintf(alamatDownload, "https://picsum.photos/%d", cnt);
+                        strftime(namaFile, 64, "%Y-%m-%d+%H:%M:%S", tmcount);
+
+                        char *argvv[] = {"wget", alamatDownload, "-q", namaFile, NULL};
+                        execv("/usr/bin/wget", argvv);
+                    }
+                    sleep(5);
+                }
+```
+- Variabel `cnt` digunakan sebagai nomor hasil formula yang akan digunakan mendownload foto.<br />
+- Variabel `namaFile` digunakan sebagai nama hasil foto yang didownload.<br />
+- Perintah `execv("/usr/bin/wget", argvv);` digunakan untuk mendownload foto yang direpetisi sebanyak 20 kali dengan menggunakan fungsi `for(int=0; i<20; i++)`.<br />
+
+Mengzip dan menghapus folder setelah terdownload 20 foto
+```
+                if(fork() == 0){
+                    char namaFolderZIP[64];
+                    sprintf(namaFolderZIP, "%s.zip", namaFolder);
+
+                    char *argvzip[] = {"zip", "-q", namaFolderZIP, namaFolder, NULL};
+                    execv("/usr/bin/zip", argvzip);
+                } else{
+                    while((wait(&status)) > 0);
+                    char *argvdel[] = {"rm", "-d", "-R", namafolder, NULL};
+                    execv("/bin/rm", argvdel);
+            }
+        } else{
+            sleep(30);
+        }
+```
+- Perintah `execv("/usr/bin/zip", argvzip);` digunakan untuk membuat ZIP berdasarkan variabel `namaFolder`.<br />
+- Perintah `execv("/bin/rm", argvdel);` digunakan untuk menghapus folder setelah membuat ZIP.<br />
+- Sebelum membuat folder lagi, proses akan disleep terlebih dahulu selama 30 detik.<br />
+
 ## SOAL 3
 Jaya adalah seorang programmer handal mahasiswa informatika. Suatu hari dia memperoleh tugas yang banyak dan berbeda tetapi harus dikerjakan secara bersamaan (multiprocessing). <br />
 - Program buatan jaya harus bisa membuat dua direktori di “/home/[USER]/modul2/”. Direktori yang pertama diberi nama “indomie”, lalu
