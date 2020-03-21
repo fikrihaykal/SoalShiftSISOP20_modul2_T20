@@ -389,6 +389,140 @@ Syntax : `gcc soal3.c -o soal3` <br />
 - Menjalankan program <br />
 Syntax : `./soal3`
 
+Memasukkan library untuk digunakan dalam fungsi main.<br />
+```
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <syslog.h>
+#include <unistd.h>
+#include <dirent.h>
+#include <wait.h>
+#include <sys/types.h>
+#include <sys/unistd.h>
+#include <sys/wait.h>
+```
+
+Deklarasi variabel dan membuat _child process_.<br />
+```
+  pid_t cid1, cid2, cid3, cid4, cid5, cid6;
+  int status;
+
+  cid1 = fork();
+  if(cid1 < 0){
+    exit(EXIT_FAILURE);
+  }
+```
+- Fungsi `cid1 = fork();` digunakan untuk membuat _child process_ pertama.<br />
+
+Membuat folder `indomie`.<br />
+```
+  if(cid1 == 0){
+    char *argv[] = {"mkdir", "-p", "indomie", NULL};
+    execv("/bin/mkdir", argv);
+  } else{
+```
+- Fungsi `execv("/bin/mkdir", argv);` digunakan untuk membuat folder `indomie`.<br />
+
+Membuat folder `sedaap`.<br />
+```
+while((wait(&status)) > 0);
+    cid2 = fork();
+
+    if(cid2 < 0){
+      exit(EXIT_FAILURE);
+    }
+
+    if(cid2 == 0){
+      sleep(5);
+      char *argv[] = {"mkdir", "-p", "sedaap", NULL};
+      execv("/bin/mkdir", argv);
+    }
+```
+- Fungsi `cid2 = fork();` digunakan untuk membuat _child process_ kedua.<br />
+- Fungsi `execv("/bin/mkdir", argv);` digunakan untuk membuat folder `sedaap`.<br />
+
+Mengunzip file `jpg.zip`.<br />
+```
+else{
+      while((wait(&status)) > 0);
+      cid3 = fork();
+
+      if(cid3 < 0){
+        exit(EXIT_FAILURE);
+      }
+
+      if(cid3 == 0){
+        char *argv[] = {"unzip", "-q", "jpg.zip", NULL};
+        execv("/usr/bin/unzip", argv);
+      }
+```
+- Fungsi `cid3 = fork();` digunakan untuk membuat _child process_ ketiga.<br />
+- Fungsi `execv("/usr/bin/unzip", argv);` digunakan untuk mengunzip file `jpg.zip`.<br />
+
+Memindahkan seluruh file kedalam folder `seedap`.<br />
+```
+else{
+        while((wait(&status)) > 0);
+        cid4 = fork();
+
+        if(cid4 < 0){
+          exit(EXIT_FAILURE);
+        }
+
+        if(cid4 == 0){
+          execl("/usr/bin/find", "find", "/home/fikri/Modul2/Soal3/jpg", "-type", "f", "-name", "*", "-exec", "mv", "-t", "/home/fikri/Modul2/Soal3/sedaap", "{}", "+", (char *) NULL);
+        }
+```
+- Fungsi `cid4 = fork();` digunakan untuk membuat _child process_ keempat.<br />
+- Fungsi `execl("....");` digunakan untuk mencari seluruh file didalam folder jpg dengan command `find` lalu memindahkan file hasil pencarian tersebut kedalam folder `sedaap` menggunakan command `mv`.<br />
+
+Memindahkan seluruh folder kedalam folder `indomie`.<br />
+```
+else{
+          while((wait(&status)) > 0);
+          cid5 = fork();
+
+          if(cid5 < 0){
+            exit(EXIT_FAILURE);
+          }
+
+          if(cid5 == 0){
+            execl("/usr/bin/find", "find", "/home/fikri/Modul2/Soal3/jpg/", "-mindepth", "1", "-type", "d", "-name", "*", "-exec", "mv", "-t", "/home/fikri/Modul2/Soal3/indomie/", "{}", "+", (char *) NULL);
+          }
+```
+- Fungsi `cid5 = fork();` digunakan untuk membuat _child process_ kelima.<br />
+- Fungsi `execl("....");` digunakan untuk mencari seluruh folder didalam folder jpg dengan command `find` lalu memindahkan file hasil pencarian tersebut kedalam folder `indomie` menggunakan command `mv`.<br />
+- Command `-mindepth 1` digunakan agar `folder` jpg sendiri tidak dipindahkan kedalam folder `indomie`.<br />
+
+Membuat file `coba1.txt` kedalam seluruh folder yang dipindahkan kedalam folder `indomie`.<br />
+```
+else{
+            while(wait((&status)) > 0);
+            cid6 = fork();
+
+            if(cid6 < 0){
+              exit(EXIT_FAILURE);
+            }
+
+            if(cid6 == 0){
+              execl("/usr/bin/find", "find", "/home/fikri/Modul2/Soal3/indomie", "-mindepth", "1", "-type", "d", "-name", "*", "-exec", "sh", "-c", "for d; do touch $d/coba1.txt;done", "{}", "+", (char *) NULL);
+            }
+```
+- Fungsi `cid6 = fork();` digunakan untuk membuat _child process_ keenam.<br />
+- Fungsi `execl("....");` digunakan untuk mencari seluruh folder yang telah dipindahkan kedalam folder `indomie` dengan command `find` lalu membuat file `coba1.txt` menggunakan command `touch` pada folder tersebut.<br />
+
+Membuat file `coba2.txt` kedalam seluruh folder yang dipindahkan kedalam folder `indomie`.<br />
+```
+else{
+              while(wait(&status) > 0);
+              sleep(3);
+              execl("/usr/bin/find", "find", "/home/fikri/Modul2/Soal3/indomie", "-mindepth", "1", "-type", "d", "-name", "*", "-exec", "sh", "-c", "for d; do touch $d/coba2.txt;done", "{}", "+", (char *) NULL);
+            }
+```
+- Fungsi `sleep(3);` digunakan sebagay _delay_ sebelum membuat file `coba2.txt`.<br />
+- Fungsi `execl("....");` digunakan untuk mencari seluruh folder yang telah dipindahkan kedalam folder `indomie` dengan command `find` lalu membuat file `coba2.txt` menggunakan command `touch` pada folder tersebut.<br />
+
 
 ## Kendala
 - Bobot soal terlalu sulit
