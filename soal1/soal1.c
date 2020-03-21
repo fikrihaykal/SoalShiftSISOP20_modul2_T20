@@ -34,21 +34,19 @@ int main(int argc, char **argv){
         	//char temp[] = argv[i];
         	
         	//Mengecek apakah argumen adalah asterisk
-            if(strcmp(argv[i], "*")){
-                jadwal[i] = -5;
-            } else if(cekAngka(argv[i])){
+            if(cekAngka(argv[i])){
                 jadwal[i] = atoi(argv[i]);
+            } else if(*argv[i] == '*'){
+                jadwal[i] = -5;
             } else{
-                printf("Argumen anda salah\n");
+                printf("Argumen anda salah\nBukan angka\n");
                 exit(EXIT_FAILURE);
             }
         }
 
-        if((jadwal[1] != -5) || (jadwal[2] != -5) || (jadwal[3] != -5)){
-            if((jadwal[1] >= 60) || (jadwal[2] >= 60) || (jadwal[3]) >= 24){
-                printf("Argumen anda salah\n");
-                exit(EXIT_FAILURE);
-            }
+        if((jadwal[1] >= 60) || (jadwal[2] >= 60) || (jadwal[3]) >= 24){
+            printf("Argumen anda salah\n");
+            exit(EXIT_FAILURE);
         }
 
         int jam, menit, detik;
@@ -87,11 +85,10 @@ int main(int argc, char **argv){
 	            if(((tm.tm_hour == jam) || (jam == -5)) && ((tm.tm_min == menit) || (menit == -5)) && ((tm.tm_sec == detik) || (detik == -5))){
 	                if(fork()==0){
 		            execl("/bin/bash", "bash", argv[4], NULL);
-		            sleep(1);
 		        }
 
 	            }
-
+		sleep(1);
         }
     }
 }
