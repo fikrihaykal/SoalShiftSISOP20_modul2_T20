@@ -41,6 +41,20 @@ Syntax : `./namafile detik menit jam lokasi.sh` <br />
 
 
 ##### Penjelasan Script yang ada di dalam file _soal1.c_ <br />
+Library yang akan digunakan untuk algoritma di dalam fungsi main. <br /> 
+```
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <errno.h>
+#include <unistd.h>
+#include <time.h>
+#include <syslog.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <sys/stat.h>
+```
+
 Fungsi untuk mengecek apakah argumen merupakan angka. <br /> 
 ```
 int cekAngka(char temp[]){
